@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Temperatura</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Conversor de Temperatura</h1>
+        <label for="celsius">Temperatura en Celsius:</label>
+        <input type="number" id="celsius" placeholder="Introduce la temperatura en Celsius">
+        <button id="convertBtn">Convertir</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        document.getElementById('convertBtn').addEventListener('click', async () => {
+            const celsius = document.getElementById('celsius').value;
+            if (celsius === '') {
+                alert('Por favor, introduce un valor en Celsius.');
+                return;
+            }
+
+            try {
+                const response = await fetch('/convert', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ celsius })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    document.getElementById('result').innerText = `${celsius}°C es igual a ${data.fahrenheit}°F`;
+                } else {
+                    document.getElementById('result').innerText = data.error;
+                }
+            } catch (error) {
+                document.getElementById('result').innerText = 'Error al conectar con el servidor. Inténtalo de nuevo.';
+            }
+        });
+    </script>
+</body>
+</html>
