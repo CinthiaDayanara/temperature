@@ -1,0 +1,6 @@
+services:
+  - name: temperature-converter
+    env: python3
+    plan: free
+    disk: 1gb
+    port: 5000
