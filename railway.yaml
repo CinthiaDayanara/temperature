@@ -1,5 +1,5 @@
 services:
-  - name: temperature-converter
+  - name: temperature
     env: python3
     plan: free
     disk: 1gb
