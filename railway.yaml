@@ -3,4 +3,5 @@ services:
     env: python3
     plan: free
     disk: 1gb
+    start: "python app.py"
     port: 5000
